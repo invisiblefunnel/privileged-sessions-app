@@ -24,6 +24,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 2.14'
   gem 'database_cleaner'
+  gem 'rspec-rails', '~> 2.14'
+  gem 'shoulda-matchers'
 end
