@@ -27,6 +27,8 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bootstrap-sass (3.0.0.0.rc)
+      sass (~> 3.2)
     builder (3.1.4)
     columnize (0.3.6)
     database_cleaner (1.2.0)
@@ -50,6 +52,7 @@ GEM
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
+    high_voltage (2.0.0)
     hike (1.2.3)
     i18n (0.6.5)
     jquery-rails (3.0.4)
@@ -127,11 +130,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (~> 3.0.0.0.rc)
   database_cleaner
   debugger
   dotenv-rails
   factory_girl_rails
   foreman
+  high_voltage
   jquery-rails
   pg
   rails (= 4.0.0)
