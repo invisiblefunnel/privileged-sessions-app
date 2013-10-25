@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Privileged Sessions</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,15 +18,20 @@
         <%= link_to 'Privileged Sessions', root_path, class: 'navbar-brand' %>
       </div>
       <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Home', root_path %></li>
+        <ul class="nav navbar-nav pull-right">
+          <%= navbar_list_item('Home') { root_path } %>
+          <%= navbar_list_item('Account', hide: !user_signed_in?) { edit_user_registration_path } %>
+          <%= navbar_list_item('Sign up', hide: user_signed_in?) { new_user_registration_path } %>
+          <%= navbar_list_item('Sign in', hide: user_signed_in?) { new_user_session_path } %>
+          <%= navbar_list_item('Sign out', hide: !user_signed_in?, method: :delete) { destroy_user_session_path } %>
         </ul>
       </div>
     </div>
   </div>
   <div class="container">
+    <%= render 'flashes' %>
     <%= yield %>
   </div>
-  <%= javascript_include_tag "application" %>
+  <%= render 'javascript' %>
 </body>
 </html>
