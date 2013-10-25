@@ -9,4 +9,8 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PrivilegedSessions::Application.config.secret_key_base = 'ec403330a3d5d75fc69628cf255fad4ea4ceef8f5acba6bfcca5d8b02a741cacfae128f8b2ee2d2f02b4d44eb3420456a6445e7b6ea30e08e9f5f98e1a32a7a5'
+
+MissingSecretKeyBaseError = Class.new(StandardError)
+
+PrivilegedSessions::Application.config.secret_key_base =
+  ENV['SECRET_KEY_BASE'] or raise MissingSecretKeyBaseError, "must provide a secret key"
