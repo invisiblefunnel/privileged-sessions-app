@@ -11,6 +11,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <%= navbar_list_item('Home') { root_path } %>
+        <%= navbar_list_item('Notes', hide: !user_signed_in?) { notes_path } %>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <%= navbar_list_item('Sign up', hide: user_signed_in?) { new_user_registration_path } %>
