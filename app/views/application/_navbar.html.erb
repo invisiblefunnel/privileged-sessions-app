@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Privileged Sessions', root_path, class: 'navbar-brand' %>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <%= navbar_list_item('Home') { root_path } %>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <%= navbar_list_item('Sign up', hide: user_signed_in?) { new_user_registration_path } %>
+        <%= navbar_list_item('Sign in', hide: user_signed_in?) { new_user_session_path } %>
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+              <%= current_user.email %> <b class="caret"></b>
+            <% end %>
+            <ul class="dropdown-menu">
+              <%= navbar_list_item('Account', hide: !user_signed_in?) { edit_user_registration_path } %>
+              <%= navbar_list_item('Sign out', hide: !user_signed_in?, method: :delete) { destroy_user_session_path } %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
