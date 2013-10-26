@@ -23,6 +23,7 @@ group :development, :test do
   gem 'debugger'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :test do
