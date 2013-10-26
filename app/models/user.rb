@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   def privileged?(key)
     return false unless key.present?
-    privileged_sessions.active.where(key: key).exists?
+    !!privileged_sessions.active.exists?(key: key)
   end
 
   def revoke_privileges!(key)
