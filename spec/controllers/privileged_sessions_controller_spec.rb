@@ -19,7 +19,7 @@ describe PrivilegedSessionsController do
 
   describe "POST :create" do
     before do
-      session[:redirect_to_privileged] = notes_path
+      session[:redirect_to_privileged] = edit_user_registration_path
     end
 
     context "without an authenticated user" do
