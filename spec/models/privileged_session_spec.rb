@@ -19,19 +19,18 @@ describe PrivilegedSession do
     expect(a.key).not_to eq b.key
   end
 
-  it "can be revoked" do
-    user = create(:user)
-    session = create(:privileged_session, user: user)
-
-    expect(user.privileged?(session.key)).to be_true
-    user.revoke_privileges!
-    expect(user.privileged?(session.key)).to be_false
+  it "is not active when revoked" do
+    session = create(:privileged_session)
+    expect(PrivilegedSession.active).to include(session)
+    session.update(revoked_at: Time.now)
+    expect(PrivilegedSession.active).not_to include(session)
   end
 
   it "remains active for 1 hour from creation" do
     user = create(:user)
     inactive = create(:privileged_session, user: user, created_at: 61.minutes.ago)
     active = create(:privileged_session, user: user, created_at: 59.minutes.ago)
+
     active_sessions = user.privileged_sessions.active.to_a
 
     expect(active_sessions).not_to include(inactive)

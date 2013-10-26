@@ -39,8 +39,7 @@ describe PrivilegedSessionsController do
 
       context "with an active privileged session" do
         before do
-          privileged_session = create(:privileged_session, user: @user)
-          session[:privileged_session_key] = privileged_session.key
+          session[:privileged_session_key] = create(:privileged_session, user: @user).key
           post :create, user: { password: 'password' }
         end
 
@@ -97,8 +96,7 @@ describe PrivilegedSessionsController do
 
       context "with an active privileged session" do
         before do
-          privileged_session = create(:privileged_session, user: @user)
-          session[:privileged_session_key] = privileged_session.key
+          session[:privileged_session_key] = create(:privileged_session, user: @user).key
           get :new
         end
 
