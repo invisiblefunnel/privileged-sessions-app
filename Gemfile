@@ -18,6 +18,7 @@ end
 group :development do
   gem 'foreman'
   gem 'quiet_assets'
+  gem 'brakeman'
 end
 
 group :development, :test do
