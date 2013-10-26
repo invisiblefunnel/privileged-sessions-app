@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_privilege!, except: [:index, :show]
+  before_action :require_privilege!
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   # GET /notes
