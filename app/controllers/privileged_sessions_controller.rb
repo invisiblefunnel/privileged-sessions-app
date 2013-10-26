@@ -1,12 +1,13 @@
 class PrivilegedSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_not_privileged, except: :destroy
+  before_action :ensure_not_privileged, except: [:destroy]
+  before_action :require_privilege!, only: [:destroy]
 
   def new
   end
 
   def create
-    if current_user.valid_password?(params[:user][:password])
+    if current_user.valid_password?(user_password)
       session[:privileged_session_key] = current_user.privileged_sessions.create.key
       redirect_to session[:redirect_to_privileged] || root_path, notice: I18n.t('privileged_session.success.privilege_enabled')
     else
@@ -21,6 +22,10 @@ class PrivilegedSessionsController < ApplicationController
   end
 
   private
+
+  def user_password
+    params[:user] && params[:user][:password]
+  end
 
   def ensure_not_privileged
     if privileged?
