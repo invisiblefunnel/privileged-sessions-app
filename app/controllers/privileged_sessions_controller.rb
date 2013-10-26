@@ -16,7 +16,7 @@ class PrivilegedSessionsController < ApplicationController
   end
 
   def destroy
-    current_user.revoke_privileges!
+    current_user.revoke_privileges!(session[:privileged_session_key])
     redirect_to root_path, notice: I18n.t('privileged_session.success.privilege_revoked')
   end
 

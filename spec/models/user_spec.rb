@@ -5,10 +5,15 @@ describe User do
 
   it "privileges can be revoked" do
     user = create(:user)
-    session = create(:privileged_session, user: user)
+    a = create(:privileged_session, user: user)
+    b = create(:privileged_session, user: user)
 
-    expect(user.privileged?(session.key)).to be_true
-    user.revoke_privileges!
-    expect(user.privileged?(session.key)).to be_false
+    expect(user.privileged?(a.key)).to be
+    expect(user.privileged?(b.key)).to be
+
+    user.revoke_privileges!(a.key)
+
+    expect(user.privileged?(a.key)).not_to be
+    expect(user.privileged?(b.key)).to be
   end
 end
