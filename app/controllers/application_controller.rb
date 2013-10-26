@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def require_active_privilege!
+  def require_privilege!
     unless privileged?
       session[:redirect_to_privileged] = request.path
       flash[:warning] = I18n.t('privileged_session.failure.privilege_required')
@@ -15,14 +15,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def active_privileged_session
-    if user_signed_in? && session[:privileged_session_key]
-      @_active_privileged_session ||=
-        current_user.latest_active_privileged_session(session[:privileged_session_key])
-    end
-  end
-
   def privileged?
-    !!active_privileged_session
+    return @_privileged if defined?(@_privileged)
+    @_privileged = user_signed_in? && current_user.privileged?(session[:privileged_session_key])
   end
 end

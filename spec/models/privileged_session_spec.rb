@@ -20,11 +20,12 @@ describe PrivilegedSession do
   end
 
   it "can be revoked" do
-    session = create(:privileged_session)
+    user = create(:user)
+    session = create(:privileged_session, user: user)
 
-    expect(session).not_to be_revoked
-    session.revoke!
-    expect(session).to be_revoked
+    expect(user.privileged?(session.key)).to be_true
+    user.revoke_privileges!
+    expect(user.privileged?(session.key)).to be_false
   end
 
   it "remains active for 1 hour from creation" do

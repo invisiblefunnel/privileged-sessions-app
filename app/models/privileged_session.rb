@@ -5,15 +5,6 @@ class PrivilegedSession < ActiveRecord::Base
 
   before_validation :set_unique_key
 
-  def revoke!
-    self.revoked_at = Time.now
-    save!
-  end
-
-  def revoked?
-    !!self.revoked_at
-  end
-
   private
 
   def set_unique_key

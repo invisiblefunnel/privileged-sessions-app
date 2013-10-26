@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable
 
-  def latest_active_privileged_session(key)
-    privileged_sessions.active.where(key: key).order('created_at DESC').first
+  def privileged?(key)
+    return false unless key.present?
+    privileged_sessions.active.where(key: key).exists?
   end
 
-  def revoke_privileged_sessions!
+  def revoke_privileges!
     privileged_sessions.active.update_all(revoked_at: Time.now)
   end
 end
