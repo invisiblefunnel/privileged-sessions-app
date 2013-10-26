@@ -23,3 +23,8 @@ en:
   privileged_session:
     failure:
       already_privileged: "Your session is already privileged."
+      invalid_password: "Password invalid."
+      privilege_required: "Enable privileged mode to access this feature."
+    success:
+      privilege_enabled: "Your session is now privileged."
+      privilege_revoked: "Your session is no longer privileged."

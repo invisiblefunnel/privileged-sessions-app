@@ -1,0 +1,7 @@
+<%= simple_form_for :user, url: privileged_sessions_path, html: { class: 'form-narrow' } do |f| %>
+  <div class="form-narrow-heading">
+    <h2>Enable Privileged Mode</h2>
+  </div>
+  <%= f.input :password, as: :password %>
+  <%= f.button :submit, value: 'Enable' %>
+<% end %>

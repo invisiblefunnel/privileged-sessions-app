@@ -23,6 +23,7 @@
             <% end %>
             <ul class="dropdown-menu">
               <%= navbar_list_item('Account', hide: !user_signed_in?) { edit_user_registration_path } %>
+              <%= navbar_list_item('Revoke Privilege', hide: !privileged?, method: :delete) { privileged_sessions_path } %>
               <%= navbar_list_item('Sign out', hide: !user_signed_in?, method: :delete) { destroy_user_session_path } %>
             </ul>
           </li>

@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   def latest_active_privileged_session(key)
     privileged_sessions.active.where(key: key).order('created_at DESC').first
   end
+
+  def revoke_privileged_sessions!
+    privileged_sessions.active.update_all(revoked_at: Time.now)
+  end
 end
