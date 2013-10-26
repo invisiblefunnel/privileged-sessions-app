@@ -4,7 +4,7 @@ PrivilegedSessions::Application.routes.draw do
     collection { delete :destroy }
   end
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   root to: 'high_voltage/pages#show', id: 'home'
 end
