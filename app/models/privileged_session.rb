@@ -3,7 +3,7 @@ class PrivilegedSession < ActiveRecord::Base
 
   scope :active, ->{ where("created_at > ? AND revoked_at IS ?", 1.hour.ago, nil) }
 
-  before_validation :set_unique_key
+  before_validation :set_unique_key, on: :create
 
   private
 

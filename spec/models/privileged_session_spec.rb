@@ -36,4 +36,13 @@ describe PrivilegedSession do
     expect(active_sessions).not_to include(inactive)
     expect(active_sessions).to include(active)
   end
+
+  it "doesn't change the key when updating" do
+    session = create(:privileged_session)
+    initial = session.key
+
+    session.update(revoked_at: Time.now)
+
+    expect(session.key).to eq initial
+  end
 end
