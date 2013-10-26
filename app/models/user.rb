@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     !!privileged_sessions.active.exists?(key: key)
   end
 
-  def revoke_privileges!(key)
+  def revoke_privilege!(key)
     privileged_sessions.where(key: key).update_all(revoked_at: Time.now)
   end
 end

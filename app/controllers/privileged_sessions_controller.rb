@@ -1,6 +1,6 @@
 class PrivilegedSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_not_privileged, except: [:destroy]
+  before_action :require_no_privilege!, except: [:destroy]
   before_action :require_privilege!, only: [:destroy]
 
   def new
@@ -17,7 +17,7 @@ class PrivilegedSessionsController < ApplicationController
   end
 
   def destroy
-    current_user.revoke_privileges!(session[:privileged_session_key])
+    current_user.revoke_privilege!(session[:privileged_session_key])
     redirect_to root_path, notice: I18n.t('privileged_session.success.privilege_revoked')
   end
 
@@ -27,7 +27,7 @@ class PrivilegedSessionsController < ApplicationController
     params[:user] && params[:user][:password]
   end
 
-  def ensure_not_privileged
+  def require_no_privilege!
     if privileged?
       redirect_to root_path, notice: I18n.t('privileged_session.failure.already_privileged')
     end

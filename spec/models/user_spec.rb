@@ -11,7 +11,7 @@ describe User do
     expect(user.privileged?(a.key)).to be_true
     expect(user.privileged?(b.key)).to be_true
 
-    user.revoke_privileges!(a.key)
+    user.revoke_privilege!(a.key)
 
     expect(user.privileged?(a.key)).to be_false
     expect(user.privileged?(b.key)).to be_true
