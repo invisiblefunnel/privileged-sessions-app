@@ -1,5 +1,6 @@
 PrivilegedSessions::Application.routes.draw do
   resources :notes
+  resources :privileged_sessions, only: [:new]
 
   devise_for :users
 

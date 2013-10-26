@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  privileged_session:
+    failure:
+      already_privileged: "Your session is already privileged."
