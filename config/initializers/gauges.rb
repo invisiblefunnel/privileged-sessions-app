@@ -1,0 +1,1 @@
+GAUGES_SITE_ID = ENV.fetch('GAUGES_SITE_ID', false)
