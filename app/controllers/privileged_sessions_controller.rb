@@ -9,7 +9,8 @@ class PrivilegedSessionsController < ApplicationController
   def create
     if current_user.valid_password?(user_password)
       session[:privileged_session_key] = current_user.privileged_sessions.create.key
-      redirect_to session[:redirect_to_privileged] || root_path, notice: I18n.t('privileged_session.success.privilege_enabled')
+      redirect_to session[:redirect_to_privileged] || root_path,
+        notice: I18n.t('privileged_session.success.privilege_enabled', minutes: PrivilegedSession::LIFESPAN)
     else
       flash[:error] = I18n.t('privileged_session.failure.invalid_password')
       render :new

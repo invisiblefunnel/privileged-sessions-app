@@ -63,7 +63,7 @@ describe PrivilegedSessionsController do
           end
 
           it { should redirect_to(session[:redirect_to_privileged]) }
-          it { should set_the_flash.to(I18n.t('privileged_session.success.privilege_enabled')) }
+          it { should set_the_flash.to(I18n.t('privileged_session.success.privilege_enabled', minutes: PrivilegedSession::LIFESPAN)) }
         end
       end
     end

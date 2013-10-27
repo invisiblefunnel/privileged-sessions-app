@@ -26,10 +26,14 @@ describe PrivilegedSession do
     expect(PrivilegedSession.active).not_to include(session)
   end
 
-  it "remains active for 1 hour from creation" do
+  it "remains active for LIFESPAN minutes from creation" do
     user = create(:user)
-    inactive = create(:privileged_session, user: user, created_at: 61.minutes.ago)
-    active = create(:privileged_session, user: user, created_at: 59.minutes.ago)
+
+    inactive_created_at = (PrivilegedSession::LIFESPAN + 1).minutes.ago
+    active_created_at = (PrivilegedSession::LIFESPAN - 1).minutes.ago
+
+    inactive = create(:privileged_session, user: user, created_at: inactive_created_at)
+    active = create(:privileged_session, user: user, created_at: active_created_at)
 
     active_sessions = user.privileged_sessions.active.to_a
 

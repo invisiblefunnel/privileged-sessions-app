@@ -26,5 +26,5 @@ en:
       invalid_password: "Password invalid."
       privilege_required: "Enable privileged mode to access this feature."
     success:
-      privilege_enabled: "Your session is now privileged."
+      privilege_enabled: "Your session is now privileged for %{minutes} minutes."
       privilege_revoked: "Your session is no longer privileged."
